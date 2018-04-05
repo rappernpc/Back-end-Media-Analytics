@@ -12,26 +12,31 @@ import socket
 class NytSpider(CrawlSpider):
     name = 'news'
     allowed_domains = ['nytimes.com']
-    start_urls = ['http://www.nytimes.com']
+    start_urls = ['https://www.nytimes.com']
 
     rules = (
-        Rule(LinkExtractor(allow=(r'/[0-9][0-9][0-9][0-9]/+[0-9][0-9]/+[0-9][0-9]+/+')),
-            callback='parse_item', follow=True),
+        Rule(
+            LinkExtractor(
+                allow=(r'/+(\d+)+/+(\d+)+/+(\d+)+/+'),
+                deny=('//html[contains(@lang, "es")]', 'blogs', 'opinion', 'slideshow', 'mobile', 'imagepages', 'interactive')
+            ),
+            callback='parse_item', follow=True,
+        ),
         #Rule(LinkExtractor(restrict_xpaths='//li[contains(@class,"SearchResults-item-3k02W")]'),
          #   callback='parse_item'),
         #Rule(LinkExtractor(restrict_xpaths='//*[contains(@class,"headline")]'),
          #   callback='parse_item'),
-        )
+    )
 
 
     def parse_item(self, response):
         #create the loader
         l = ItemLoader(item=NewsItem(), response=response)
         #load fields using xpath
-        l.add_xpath('title', '//*[@itemprop="headline"]/text()')
+        l.add_xpath('title', '//*[@itemprop="headline" or @class="balancedHeadline"]/text()')
         l.add_xpath('author', '//*[@class="byline-author"]/text()')
         l.add_xpath('article', '//*[@class="story-body-text story-content"]/text()')
-        l.add_xpath('dop', '//*[@class="dateline"]/text()')
+        l.add_xpath('dop', '//*[@itemprop="dateModified"]/text()')
             
 
         #housekeeping fields
