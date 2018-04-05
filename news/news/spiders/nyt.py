@@ -18,7 +18,7 @@ class NytSpider(CrawlSpider):
         Rule(
             LinkExtractor(
                 allow=(r'/+(\d+)+/+(\d+)+/+(\d+)+/+'),
-                deny=('//html[contains(@lang, "es")]', 'blogs', 'opinion', 'slideshow', 'mobile', 'imagepages', 'interactive')
+                deny=('//*html[contains(@lang, "es")]', 'es', 'blogs', 'opinion', 'slideshow', 'mobile', 'imagepages', 'interactive')
             ),
             callback='parse_item', follow=True,
         ),
