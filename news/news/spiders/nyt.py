@@ -15,7 +15,7 @@ import socket
 class NytSpider(CrawlSpider):
     name = 'news'
     allowed_domains = ['nytimes.com']
-    start_urls = ['http://spiderbites.nytimes.com/1999/articles_1999_02_00003.html']
+    start_urls = ['http://spiderbites.nytimes.com/2015/']
 
     rules = (
         Rule(LinkExtractor(allow=('1999'),deny=('classified' ,'style', 'gst', 'key-rates', 'search', 'section', 'slideshow', 'mobile', 'imagepages', 'interactive')),callback='parse_link', follow=True,),)
