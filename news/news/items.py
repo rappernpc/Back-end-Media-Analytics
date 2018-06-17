@@ -10,15 +10,16 @@ class NewsItem(Item):
     title = Field()
     author = Field()
     article = Field()
+    dop = Field()
     section = Field()
 
     #calculated fields
-    images = Field()
-    location = Field()
+    #images = Field()
+    #location = Field()
 
     #Housekeeping fields
     url = Field()
-    project = Field()
-    spider = Field()
-    server = Field()
-    date = Field()       
+    #project = Field()
+    #spider = Field()
+    #server = Field()
+    #date = Field()       

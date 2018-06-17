@@ -6,7 +6,7 @@ from scrapy.loader.processors import MapCompose, Join
 from scrapy.loader import ItemLoader
 from news.items import NewsItem
 import datetime
-import urllib.parse
+from urlparse import urlparse
 import socket
 #from selenium import webdriver 
 
