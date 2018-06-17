@@ -10,6 +10,7 @@ class NewsItem(Item):
     title = Field()
     author = Field()
     article = Field()
+    section = Field()
 
     #calculated fields
     images = Field()

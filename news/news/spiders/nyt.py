@@ -18,7 +18,7 @@ class NytSpider(CrawlSpider):
     start_urls = ['http://spiderbites.nytimes.com/2015/']
 
     rules = (
-        Rule(LinkExtractor(allow=('1999'),deny=('classified' ,'style', 'gst', 'key-rates', 'search', 'section', 'slideshow', 'mobile', 'imagepages', 'interactive')),callback='parse_link', follow=True,),)
+        Rule(LinkExtractor(allow=('2015'),deny=('classified' ,'style', 'gst', 'key-rates', 'search', 'section', 'slideshow', 'mobile', 'imagepages', 'interactive')),callback='parse_link', follow=True,),)
         #Rule(LinkExtractor(restrict_xpaths=('//*[@id="headlines" or @id="mainContent"]')),
         #    callback='parse_item', follow=True),)
         #Rule(LinkExtractor(restrict_xpaths='//*[contains(@class,"headline")]'),
@@ -40,6 +40,7 @@ class NytSpider(CrawlSpider):
         l.add_xpath('author', '//*[@class="byline-author" or @class="author creator"]/text()')
         l.add_xpath('article', '//*[@class="story-body-text story-content" or @class="css-18sbwfn"]/text()')
         l.add_xpath('dop', '//*[@itemprop="dateModified" or @class="css-pnci9ceqgapgq0"]/text()')
+        l.add_xpath('section', '//*[@id="kicker"]/span/a/text()')
         
         
         #housekeeping fields
